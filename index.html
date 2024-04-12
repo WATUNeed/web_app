@@ -34,8 +34,23 @@
                 ws.send(input.value)
                 input.value = ''
                 event.preventDefault()
+
+                // Sending GET request with parameters
+                var requestData = {
+                    init_data: tg.initData,
+                    hash: hash
+                };
+                var urlParams = new URLSearchParams(requestData);
+                fetch('https://web-app.containers.cloud.ru/check/?' + urlParams)
+                    .then(response => {
+                        // Handle response here if needed
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        // Handle error here if needed
+                        console.error('Error:', error);
+                    });
             }
         </script>
     </body>
 </html>
-"""
