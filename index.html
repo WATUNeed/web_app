@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web App</title>
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    </head>
+    <body>
+        <h1>with WebSocket</h1>
+        <form action="" onsubmit="sendMessage(event)">
+            <input type="text" id="messageText" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+        <ul id='messages'>
+        </ul>
+        <script>
+            var ws = new WebSocket("wss://web-app.containers.cloud.ru/ws");
+            let tg = window.Telegram.WebApp;
+            let initDataURLSP = new URLSearchParams(WebApp.initData);
+            var hash = initDataURLSP.get('hash');
+                
+            Console.log(WebApp.initData);
+            Console.log(initDataURLSP);
+            Console.log(hash);
+
+            ws.onmessage = function(event) {
+                var messages = document.getElementById('messages')
+                var message = document.createElement('li')
+                var content = document.createTextNode(event.data)
+                message.appendChild(content)
+                messages.appendChild(message)
+            };
+            function sendMessage(event) {
+                var input = document.getElementById("messageText")
+                ws.send(input.value)
+                input.value = ''
+                event.preventDefault()
+            }
+        </script>
+    </body>
+</html>
+"""
