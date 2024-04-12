@@ -1,16 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://telegram.org/css/telegram-app.css">
+    <style>
+        /* Add custom styles if needed */
+        .status-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
-<body>
-    <h1>System Status</h1>
-    <div id="status"></div>
-    <h2>Session Presence</h2>
-    <div id="session-status"></div>
-    <h2>Basic Information</h2>
-    <div id="basic-info"></div>
+<body class="tg">
+    <div class="tg-wrap">
+        <header class="tg-header">
+            <h1 class="tg-title">System Status</h1>
+        </header>
+        <div class="tg-main">
+            <div class="tg-container">
+                <div class="tg-row">
+                    <div class="tg-col">
+                        <div class="status-container">
+                            <div class="tg-label">WebSocket Connection Status:</div>
+                            <div class="tg-text" id="status"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-row">
+                    <div class="tg-col">
+                        <div class="status-container">
+                            <div class="tg-label">Session Presence:</div>
+                            <div class="tg-text" id="session-status"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-row">
+                    <div class="tg-col">
+                        <div class="status-container">
+                            <div class="tg-label">Basic Information:</div>
+                            <div class="tg-text" id="basic-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws");
@@ -21,17 +57,12 @@
         fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
             .then(response => {
                 console.log(response);
-                // Display websocket connection status
-                document.getElementById('status').innerText = "WebSocket Connection Status: " + (ws.readyState === WebSocket.OPEN ? "Connected" : "Disconnected");
-                // Check if "session" key exists in the cookie
-                var sessionStatus = document.getElementById('session-status');
-                sessionStatus.innerText = "Session Presence: " + (document.cookie.includes("session=") ? "Present" : "Not Present");
-                // Display basic system information
+                document.getElementById('status').innerText = (ws.readyState === WebSocket.OPEN ? "Connected" : "Disconnected");
+                document.getElementById('session-status').innerText = (document.cookie.includes("session=") ? "Present" : "Not Present");
                 var basicInfo = document.getElementById('basic-info');
-                basicInfo.innerText = "Basic Information:\n";
                 for (var key in tg) {
                     if (tg.hasOwnProperty(key)) {
-                        basicInfo.innerText += key + ": " + tg[key] + "\n";
+                        basicInfo.innerHTML += "<div><strong>" + key + ":</strong> " + tg[key] + "</div>";
                     }
                 }
             })
@@ -39,14 +70,14 @@
                 console.error('Error:', error);
             });
 
-        // Update websocket connection status dynamically
         ws.onopen = function () {
-            document.getElementById('status').innerText = "WebSocket Connection Status: Connected";
+            document.getElementById('status').innerText = "Connected";
         };
 
         ws.onclose = function () {
-            document.getElementById('status').innerText = "WebSocket Connection Status: Disconnected";
+            document.getElementById('status').innerText = "Disconnected";
         };
     </script>
 </body>
 </html>
+
