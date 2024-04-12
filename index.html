@@ -32,7 +32,7 @@
                 event.preventDefault()
 
                 var requestData = {
-                    init_data: checkDataString,
+                    init_data: initDataURLSP,
                 };
                 var urlParams = new URLSearchParams(requestData);
                 fetch('https://web-app.containers.cloud.ru/check/?' + urlParams)
