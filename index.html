@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        /* Default styles for both light and dark modes */
+        .tg-header {
+            background-color: var(--tg-headerColor);
+            color: var(--tg-colorScheme);
+            height: var(--tg-viewportHeight);
+        }
+        .tg-main {
+            background-color: var(--tg-backgroundColor);
+            height: var(--tg-viewportStableHeight);
+        }
+
+        /* Light mode */
+        @media (prefers-color-scheme: light) {
+            .tg-header {
+                background-color: var(--tg-themeParams-light-bg); /* Light mode background color */
+                color: var(--tg-themeParams-light-text); /* Light mode text color */
+            }
+            .tg-main {
+                background-color: var(--tg-themeParams-light-bg); /* Light mode background color */
+                color: var(--tg-themeParams-light-text); /* Light mode text color */
+            }
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            .tg-header {
+                background-color: var(--tg-themeParams-dark-bg); /* Dark mode background color */
+                color: var(--tg-themeParams-dark-text); /* Dark mode text color */
+            }
+            .tg-main {
+                background-color: var(--tg-themeParams-dark-bg); /* Dark mode background color */
+                color: var(--tg-themeParams-dark-text); /* Dark mode text color */
+            }
+        }
+    </style>
 </head>
 <body class="tg">
     <div class="tg-wrap">
@@ -59,4 +95,3 @@
     </script>
 </body>
 </html>
-
