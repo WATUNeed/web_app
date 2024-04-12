@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Web App</title>
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    </head>
-    <body>
+<head>
+    <title>Telegram WebApp</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <h1>System Status</h1>
+    <div id="status"></div>
+    <h2>Session Presence</h2>
+    <div id="session-status"></div>
+    <h2>Basic Information</h2>
+    <div id="basic-info"></div>
 
-        <h1>with WebSocket</h1>
-        <form action="" onsubmit="sendMessage(event)">
-            <input type="text" id="messageText" autocomplete="off"/>
-            <button>Send</button>
-        </form>
-        <ul id='messages'>
-        </ul>
-        <script>
-            var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws");
-            let tg = window.Telegram.WebApp;
-            let initDataURLSP = new URLSearchParams(tg.initData);
+    <script>
+        var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws");
+        let tg = window.Telegram.WebApp;
+        let initDataURLSP = new URLSearchParams(tg.initData);
+        var requestData = { init_data: initDataURLSP };
+        var urlParams = new URLSearchParams(requestData);
+        fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
+            .then(response => {
+                console.log(response);
+                // Display websocket connection status
+                document.getElementById('status').innerText = "WebSocket Connection Status: " + (ws.readyState === WebSocket.OPEN ? "Connected" : "Disconnected");
+                // Check if "session" key exists in the cookie
+                var sessionStatus = document.getElementById('session-status');
+                sessionStatus.innerText = "Session Presence: " + (document.cookie.includes("session=") ? "Present" : "Not Present");
+                // Display basic system information
+                var basicInfo = document.getElementById('basic-info');
+                basicInfo.innerText = "Basic Information:\n";
+                for (var key in tg) {
+                    if (tg.hasOwnProperty(key)) {
+                        basicInfo.innerText += key + ": " + tg[key] + "\n";
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
 
-            ws.onmessage = function(event) {
-                var messages = document.getElementById('messages')
-                var message = document.createElement('li')
-                var content = document.createTextNode(event.data)
-                message.appendChild(content)
-                messages.appendChild(message)
-            };
-            function sendMessage(event) {
-                var input = document.getElementById("messageText")
-                ws.send(input.value)
-                input.value = ''
-                event.preventDefault()
+        // Update websocket connection status dynamically
+        ws.onopen = function () {
+            document.getElementById('status').innerText = "WebSocket Connection Status: Connected";
+        };
 
-                var requestData = {
-                    init_data: initDataURLSP,
-                };
-                var urlParams = new URLSearchParams(requestData);
-                fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-            }
-        </script>
-    </body>
+        ws.onclose = function () {
+            document.getElementById('status').innerText = "WebSocket Connection Status: Disconnected";
+        };
+    </script>
+</body>
 </html>
