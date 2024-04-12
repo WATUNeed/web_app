@@ -17,7 +17,6 @@
             var ws = new WebSocket("wss://web-app.containers.cloud.ru/ws");
             let tg = window.Telegram.WebApp;
             let initDataURLSP = new URLSearchParams(tg.initData);
-            var hash = initDataURLSP.get('hash');
 
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
@@ -32,24 +31,15 @@
                 input.value = ''
                 event.preventDefault()
 
-
-                initDataURLSP.delete('hash');
-                initDataURLSP.sort();
-                var checkDataString = initDataURLSP.toString().replaceAll('&', '\n');
-
-                // Sending GET request with parameters
                 var requestData = {
                     init_data: checkDataString,
-                    hash: hash
                 };
                 var urlParams = new URLSearchParams(requestData);
                 fetch('https://web-app.containers.cloud.ru/check/?' + urlParams)
                     .then(response => {
-                        // Handle response here if needed
                         console.log(response);
                     })
                     .catch(error => {
-                        // Handle error here if needed
                         console.error('Error:', error);
                     });
             }
