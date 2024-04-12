@@ -6,39 +6,29 @@
     <title>Telegram WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* Default styles for both light and dark modes */
+        :root {
+            --tg-headerColor: #1E1E1E; /* Dark gray for header */
+            --tg-colorScheme: #FFFFFF; /* White for text */
+            --tg-backgroundColor: #000000; /* Black for background */
+            --tg-viewportHeight: 60px; /* Adjust as needed */
+            --tg-viewportStableHeight: calc(100vh - var(--tg-viewportHeight)); /* Adjust as needed */
+        }
+
         .tg-header {
             background-color: var(--tg-headerColor);
             color: var(--tg-colorScheme);
             height: var(--tg-viewportHeight);
         }
+
         .tg-main {
             background-color: var(--tg-backgroundColor);
             height: var(--tg-viewportStableHeight);
         }
 
-        /* Light mode */
-        @media (prefers-color-scheme: light) {
-            .tg-header {
-                background-color: var(--tg-themeParams-light-bg); /* Light mode background color */
-                color: var(--tg-themeParams-light-text); /* Light mode text color */
-            }
-            .tg-main {
-                background-color: var(--tg-themeParams-light-bg); /* Light mode background color */
-                color: var(--tg-themeParams-light-text); /* Light mode text color */
-            }
-        }
-
-        /* Dark mode */
-        @media (prefers-color-scheme: dark) {
-            .tg-header {
-                background-color: var(--tg-themeParams-dark-bg); /* Dark mode background color */
-                color: var(--tg-themeParams-dark-text); /* Dark mode text color */
-            }
-            .tg-main {
-                background-color: var(--tg-themeParams-dark-bg); /* Dark mode background color */
-                color: var(--tg-themeParams-dark-text); /* Dark mode text color */
-            }
+        /* Additional styles for text and labels */
+        .tg-label,
+        .tg-text {
+            color: var(--tg-colorScheme);
         }
     </style>
 </head>
@@ -74,6 +64,7 @@
         let initDataURLSP = new URLSearchParams(tg.initData);
         var requestData = { init_data: initDataURLSP };
         var urlParams = new URLSearchParams(requestData);
+
         var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws/?" + urlParams);
         fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
             .then(response => {
