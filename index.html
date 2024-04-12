@@ -6,25 +6,19 @@
     <title>Telegram WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root {
-            --tg-color: #FFFFFF;
-        }
 
         .tg-header {
-            background-color: var(--tg-headerColor);
-            color: var(--tg-color);
-            height: var(--tg-viewportHeight);
+            background-color: var(--tg-theme-header-bg-color);
+            color: var(--tg-theme-text-color);
         }
 
         .tg-main {
-            background-color: var(--tg-backgroundColor);
-            height: var(--tg-viewportStableHeight);
+            background-color: var(--tg-theme-bg-color);
         }
 
-        /* Additional styles for text and labels */
         .tg-label,
         .tg-text {
-            color: var(--tg-color);
+            color: var(--tg-theme-text-color);
         }
     </style>
 </head>
@@ -79,13 +73,6 @@
         ws.onclose = function () {
             document.getElementById('status').innerText = "Disconnected";
         };
-
-        // Check color scheme and adjust CSS variables accordingly
-        if (tg.colorScheme === "dark") {
-            document.documentElement.style.setProperty('--tg-color', '#FFFFFF');
-        } else if (tg.colorScheme === "white") {
-            document.documentElement.style.setProperty('--tg-color', '#000000');
-        }
     </script>
 </body>
 </html>
