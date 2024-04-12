@@ -14,7 +14,7 @@
         <ul id='messages'>
         </ul>
         <script>
-            var ws = new WebSocket("wss://web-app.containers.cloud.ru/ws");
+            var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws");
             let tg = window.Telegram.WebApp;
             let initDataURLSP = new URLSearchParams(tg.initData);
 
@@ -35,7 +35,7 @@
                     init_data: initDataURLSP,
                 };
                 var urlParams = new URLSearchParams(requestData);
-                fetch('https://web-app.containers.cloud.ru/check/?' + urlParams)
+                fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
                     .then(response => {
                         console.log(response);
                     })
