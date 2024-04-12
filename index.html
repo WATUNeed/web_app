@@ -6,19 +6,72 @@
     <title>Telegram WebApp</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        body.tg {
+            background-color: var(--tg-theme-bg-color);
+            color: var(--tg-theme-text-color);
+            font-family: Arial, sans-serif;
+        }
+
+        .tg-wrap {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
         .tg-header {
             background-color: var(--tg-theme-header-bg-color);
             color: var(--tg-theme-text-color);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .tg-title {
+            margin: 0;
         }
 
         .tg-main {
-            background-color: var(--tg-theme-bg-color);
+            background-color: var(--tg-theme-section-bg-color);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
         }
 
-        .tg-label,
+        .tg-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tg-row {
+            margin-bottom: 20px;
+        }
+
+        .tg-col {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .status-container {
+            text-align: center;
+        }
+
+        .tg-label {
+            color: var(--tg-theme-subtitle-text-color);
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
         .tg-text {
-            color: var(--tg-theme-text-color);
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--tg-theme-accent-text-color);
+        }
+
+        .status-container {
+            border: 1px solid var(--tg-theme-secondary-bg-color);
+            border-radius: 5px;
+            padding: 10px;
+            background-color: var(--tg-theme-secondary-bg-color);
         }
     </style>
 </head>
