@@ -16,11 +16,10 @@
         <script>
             var ws = new WebSocket("wss://web-app.containers.cloud.ru/ws");
             let tg = window.Telegram.WebApp;
-            let initDataURLSP = new URLSearchParams(WebApp.initData);
+            let initDataURLSP = new URLSearchParams(tg.initData);
             var hash = initDataURLSP.get('hash');
                 
-            Console.log(WebApp.initData);
-            Console.log(initDataURLSP);
+            Console.log(tg.initData);
             Console.log(hash);
 
             ws.onmessage = function(event) {
