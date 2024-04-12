@@ -19,8 +19,8 @@
             let initDataURLSP = new URLSearchParams(tg.initData);
             var hash = initDataURLSP.get('hash');
                 
-            Console.log(tg.initData);
-            Console.log(hash);
+            console.log(tg.initData);
+            console.log(hash);
 
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
