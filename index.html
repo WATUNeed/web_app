@@ -53,7 +53,7 @@
         let initDataURLSP = new URLSearchParams(tg.initData);
         var requestData = { init_data: initDataURLSP };
         var urlParams = new URLSearchParams(requestData);
-        var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws/?" + urlParams);
+        var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws?" + urlParams);
         fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
             .then(response => {
                 console.log(response);
