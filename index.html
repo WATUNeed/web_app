@@ -7,12 +7,12 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            --tg-colorScheme: #FFFFFF; /* White for text */
+            --tg-color: #FFFFFF;
         }
 
         .tg-header {
             background-color: var(--tg-headerColor);
-            color: var(--tg-colorScheme);
+            color: var(--tg-color);
             height: var(--tg-viewportHeight);
         }
 
@@ -21,9 +21,10 @@
             height: var(--tg-viewportStableHeight);
         }
 
+        /* Additional styles for text and labels */
         .tg-label,
         .tg-text {
-            color: var(--tg-colorScheme);
+            color: var(--tg-color);
         }
     </style>
 </head>
@@ -78,6 +79,13 @@
         ws.onclose = function () {
             document.getElementById('status').innerText = "Disconnected";
         };
+
+        // Check color scheme and adjust CSS variables accordingly
+        if (tg.colorScheme === "dark") {
+            document.documentElement.style.setProperty('--tg-color', '#FFFFFF');
+        } else if (tg.colorScheme === "white") {
+            document.documentElement.style.setProperty('--tg-color', '#000000');
+        }
     </script>
 </body>
 </html>
