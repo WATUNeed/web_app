@@ -113,7 +113,7 @@
             .then(response => {
                 document.cookie = 'session=' + encodeURIComponent(response);
                 document.getElementById('status').innerText = (ws.readyState === WebSocket.OPEN ? "Connected" : "Disconnected");
-                document.getElementById('session-status').innerText = (document.cookie.includes("session=") ? "Present" : "Not Present");
+                document.getElementById('session-status').innerText = (document.cookie.includes("session=") ? "Present" : document.cookie[session]);
             })
             .catch(error => {
                 console.error('Error:', error);
