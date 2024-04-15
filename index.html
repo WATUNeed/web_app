@@ -112,7 +112,7 @@
         fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
             .then(response => {
                 console.log(response);
-                document.cookie = 'session=' + response;
+                document.cookie = 'session=' + response.text();
                 document.getElementById('status').innerText = (ws.readyState === WebSocket.OPEN ? "Connected" : "Disconnected");
                 document.getElementById('session-status').innerText = (document.cookie.includes("session=") ? "Present" : "No Present");
             })
