@@ -110,9 +110,10 @@
 
         var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws/?" + urlParams);
         fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
-            .then(response => {
-                console.log(response);
-                document.cookie = 'session=' + response.text();
+            .then(response  => response.text())
+            .then((text) => {
+                console.log(text);
+                document.cookie = 'session=' + text;
                 document.getElementById('status').innerText = (ws.readyState === WebSocket.OPEN ? "Connected" : "Disconnected");
                 document.getElementById('session-status').innerText = (document.cookie.includes("session=") ? "Present" : "No Present");
             })
