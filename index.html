@@ -108,7 +108,7 @@
         var requestData = { init_data: initDataURLSP };
         var urlParams = new URLSearchParams(requestData);
 
-        var ws = new WebSocket("wss://webapp.containers.cloud.ru/ws/?" + urlParams);
+        console.log(urlParams)
         fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
             .then(response  => response.text())
             .then((text) => {
