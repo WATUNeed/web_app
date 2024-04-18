@@ -104,31 +104,17 @@
 
     <script>
         let tg = window.Telegram.WebApp;
-        console.log(tg.initData)
         let initDataURLSP = new URLSearchParams(tg.initData);
         var requestData = { init_data: initDataURLSP };
         var urlParams = new URLSearchParams(requestData);
 
-        console.log(urlParams)
-        fetch('https://webapp.containers.cloud.ru/check/?' + urlParams)
-            .then(response  => response.text())
-            .then((text) => {
-                console.log(text);
-                document.cookie = 'session=' + text;
-                document.getElementById('status').innerText = (ws.readyState === WebSocket.OPEN ? "Connected" : "Disconnected");
-                document.getElementById('session-status').innerText = (document.cookie.includes("session=") ? "Present" : "No Present");
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-
-        ws.onopen = function () {
-            document.getElementById('status').innerText = "Connected";
-        };
-
-        ws.onclose = function () {
-            document.getElementById('status').innerText = "Disconnected";
-        };
+        let url = 'https://6ca8440b109452.lhr.life/sign-in/' + urlParams
+        const response = await fetch(url, {
+            method: 'POST',
+            body: {
+                init_data: urlParams
+            }
+        });
     </script>
 </body>
 </html>
