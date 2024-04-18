@@ -103,6 +103,11 @@
     </div>
 
     <script>
+        let tg = window.Telegram.WebApp;
+        let initDataURLSP = new URLSearchParams(tg.initData);
+        var requestData = { init_data: initDataURLSP };
+        var urlParams = new URLSearchParams(requestData);
+
         async function requestAPI(urlParams) {
             let url = 'https://cfa3cf3c0718ba.lhr.life/api/v1/sign-in/web-app/'
             const response = await fetch(url, {
@@ -111,13 +116,7 @@
                     init_data: urlParams
                 })
             });
-
         }
-
-        let tg = window.Telegram.WebApp;
-        let initDataURLSP = new URLSearchParams(tg.initData);
-        var requestData = { init_data: initDataURLSP };
-        var urlParams = new URLSearchParams(requestData);
 
         requestAPI(initDataURLSP)
     </script>
