@@ -110,8 +110,11 @@
             let url = 'https://5c97c6c4064301.lhr.life/api/v1/sign-in/web-app/'
             const response = await fetch(url, {
                 method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify({
-                    init_data: "sdgaasdg"
+                    init_data: urlParams
                 })
             });
         }
