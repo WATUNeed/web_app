@@ -104,6 +104,7 @@
 
     <script>
         let tg = window.Telegram.WebApp;
+        console.log(tg.initData)
         let initDataURLSP = new URLSearchParams(tg.initData);
         var requestData = { init_data: initDataURLSP };
         var urlParams = new URLSearchParams(requestData);
