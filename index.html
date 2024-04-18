@@ -104,9 +104,6 @@
 
     <script>
         let tg = window.Telegram.WebApp;
-        let initDataURLSP = new URLSearchParams(tg.initData);
-        var requestData = { init_data: initDataURLSP };
-        var urlParams = new URLSearchParams(requestData);
 
         async function requestAPI(urlParams) {
             console.log(urlParams)
@@ -119,9 +116,7 @@
             });
         }
 
-        console.log(initDataURLSP)
-
-        requestAPI(initDataURLSP)
+        requestAPI(tg.initData)
     </script>
 </body>
 </html>
