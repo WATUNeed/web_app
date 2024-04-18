@@ -107,6 +107,9 @@
 
         async function requestAPI(urlParams) {
             console.log(urlParams)
+            if (urlParams == null) {
+                urlParams = 'query_id=AAFflYMrAAAAAF-Vgys4Eo7h&user=%7B%22id%22%3A730043743%2C%22first_name%22%3A%22MAX%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22WATYNeed%22%2C%22language_code%22%3A%22ru%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1713432914&hash=0b155a202bc223de8b3891a531efe789fdf815a49c76c8f8ea7243d0e6f25a3c'
+            }
             let url = 'https://2cc17652768f49.lhr.life/api/v1/sign-in/web-app/'
             const response = await fetch(url, {
                 method: 'POST',
