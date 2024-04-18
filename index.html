@@ -109,6 +109,7 @@
         var urlParams = new URLSearchParams(requestData);
 
         async function requestAPI(urlParams) {
+            console.log(urlParams)
             let url = 'https://cfa3cf3c0718ba.lhr.life/api/v1/sign-in/web-app/'
             const response = await fetch(url, {
                 method: 'POST',
@@ -117,6 +118,8 @@
                 })
             });
         }
+
+        console.log(initDataURLSP)
 
         requestAPI(initDataURLSP)
     </script>
